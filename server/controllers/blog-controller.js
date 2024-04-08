@@ -46,4 +46,19 @@ async function addNewBlog(req, res) {
   return res.status(201).json({ newBlog });
 }
 
-module.exports = { fetchListOfBLogs, addNewBlog };
+async function deleteBlog(req, res) {
+  const { id } = req.params;
+  let blogToDelete;
+  try {
+    blogToDelete = await Blog.findById({ _id: id });
+    await Blog.deleteOne(blogToDelete);
+
+    return res
+      .status(200)
+      .json(`The blog with the id ${id} was deleted succesfully`);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+module.exports = { fetchListOfBLogs, addNewBlog, deleteBlog };
