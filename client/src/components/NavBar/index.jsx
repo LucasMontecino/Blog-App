@@ -3,13 +3,15 @@ import { NavLink } from "react-router-dom";
 export default function NavBar() {
   return (
     <header>
-      <nav>
-        <h1>Blog Website</h1>
-        <ul>
+      <nav className="flex justify-between px-8 h-12 items-center bg-slate-800 text-white shadow-md shadow-slate-800">
+        <h1>
+          <NavLink to={"/"} className={"font-bold text-xl"}>
+            Blog Website
+          </NavLink>
+        </h1>
+        <ul className="flex gap-8">
           <li>
-            <NavLink to={"/"} className={"text-xl text-red-400"}>
-              Home
-            </NavLink>
+            <NavLink to={"/"}>Home</NavLink>
           </li>
           <li>
             <NavLink to={"/addBlog"}>Add Blog</NavLink>
