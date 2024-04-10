@@ -10,9 +10,6 @@ export default function BlogStateContext({ children }) {
 
   const [blogDetail, setBlogDetail] = useState({});
 
-  // const url =
-  //   "https://blog-api-backend-giuemael3-lucasmontecinos-projects.vercel.app";
-
   async function fetchingBlogs(url) {
     try {
       setLoading(true);
