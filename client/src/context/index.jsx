@@ -10,6 +10,9 @@ export default function BlogStateContext({ children }) {
 
   const [blogDetail, setBlogDetail] = useState({});
 
+  // const url =
+  //   "https://blog-api-backend-giuemael3-lucasmontecinos-projects.vercel.app";
+
   async function fetchingBlogs(url) {
     try {
       setLoading(true);
@@ -31,7 +34,7 @@ export default function BlogStateContext({ children }) {
 
   async function deleteBlog(currentId) {
     try {
-      const response = await fetch("http://localhost:3000/api/blog", {
+      const response = await fetch(`http://localhost:3001/api/blog`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id: currentId }),
@@ -52,14 +55,14 @@ export default function BlogStateContext({ children }) {
 
   async function updateBlog(id, title, description) {
     try {
-      const response = await fetch(`http://localhost:3000/api/blog/${id}`, {
+      const response = await fetch(`http://localhost:3001/api/blog/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title, description }),
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP erro! status: ${response.status}`);
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
 
       const data = await response.json();
@@ -80,7 +83,7 @@ export default function BlogStateContext({ children }) {
   }
 
   useEffect(() => {
-    fetchingBlogs("http://localhost:3000/api/blog");
+    fetchingBlogs(`http://localhost:3001/api/blog`);
   }, []);
 
   return (
