@@ -8,6 +8,8 @@ export default function BlogStateContext({ children }) {
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState(null);
 
+  const [blogDetail, setBlogDetail] = useState({});
+
   async function fetchingBlogs(url) {
     try {
       setLoading(true);
@@ -48,12 +50,51 @@ export default function BlogStateContext({ children }) {
     }
   }
 
+  async function updateBlog(id, title, description) {
+    try {
+      const response = await fetch(`http://localhost:3000/api/blog/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title, description }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP erro! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log("Update blog: ", data);
+
+      window.location.assign("/");
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  function handleBlogDetail(currentDetailId) {
+    let cpyBlogs = [...blogs];
+
+    let result = cpyBlogs.find((blog) => blog._id === currentDetailId);
+
+    setBlogDetail(result);
+  }
+
   useEffect(() => {
     fetchingBlogs("http://localhost:3000/api/blog");
   }, []);
 
   return (
-    <BlogGlobalContext.Provider value={{ blogs, loading, errors, deleteBlog }}>
+    <BlogGlobalContext.Provider
+      value={{
+        blogs,
+        loading,
+        errors,
+        deleteBlog,
+        handleBlogDetail,
+        blogDetail,
+        updateBlog,
+      }}
+    >
       {children}
     </BlogGlobalContext.Provider>
   );
