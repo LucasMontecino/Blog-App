@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { BlogGlobalContext } from "../../context";
 import { NavLink } from "react-router-dom";
-import { AiOutlineDelete } from "react-icons/ai";
+import BlogCard from "../../components/BlogCard";
 
 export default function Home() {
   const { blogs, loading, errors, deleteBlog } = useContext(BlogGlobalContext);
@@ -29,23 +29,7 @@ export default function Home() {
       {blogs && blogs.length > 0 ? (
         blogs.map((blog) => {
           return (
-            <article
-              key={blog._id}
-              className="rounded-md border bg-white shadow-md flex flex-col justify-between px-4 py-4 w-72 h-52"
-            >
-              <p className="border border-amber-300 bg-amber-100 shadow-md rounded-md px-3 py-1">
-                {blog.description}
-              </p>
-              <div className="flex items-center justify-between">
-                <h2 className="text-left font-bold text-teal-700">
-                  {blog.title}
-                </h2>
-                <AiOutlineDelete
-                  className="text-teal-700 text-xl cursor-pointer"
-                  onClick={() => deleteBlog(blog._id)}
-                />
-              </div>
-            </article>
+            <BlogCard blog={blog} key={blog._id} deleteBlog={deleteBlog} />
           );
         })
       ) : (
