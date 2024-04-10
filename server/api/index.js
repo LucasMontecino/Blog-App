@@ -1,14 +1,18 @@
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
-const blogRouter = require("./routes/blog-route");
-require("./db");
+const blogRouter = require("../routes/blog-route");
+require("../db");
 
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+  })
+);
 app.use(express.json());
-app.use(morgan("combined"));
+app.use(morgan("dev"));
 
 app.use("/api", blogRouter);
 
@@ -21,4 +25,6 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: "Internal Server Error" });
 });
 
-app.listen(3000, () => console.log(`Server listening on port 3000...`));
+app.listen(3001, () => console.log(`Server listening on port 3001...`));
+
+module.exports = app;
