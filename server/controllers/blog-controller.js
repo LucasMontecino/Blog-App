@@ -47,7 +47,7 @@ async function addNewBlog(req, res) {
 }
 
 async function deleteBlog(req, res) {
-  const { id } = req.params;
+  const { id } = req.body;
   let blogToDelete;
   try {
     blogToDelete = await Blog.findById({ _id: id });
