@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { BlogGlobalContext } from "../../context";
 import Loading from "../../components/Loading";
+import Errors from "../../components/Errors";
 
 export default function AddBlog() {
   const { addBlog, loading, errors } = useContext(BlogGlobalContext);
@@ -26,11 +27,7 @@ export default function AddBlog() {
   }
 
   if (errors !== null) {
-    return (
-      <p className="text-red-600 font-bold text-2xl h-48 flex items-center justify-center uppercase">
-        {errors}
-      </p>
-    );
+    return <Errors errors={errors} />;
   }
 
   return (
