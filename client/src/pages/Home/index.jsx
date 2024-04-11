@@ -2,18 +2,13 @@ import { useContext } from "react";
 import { BlogGlobalContext } from "../../context";
 import { NavLink } from "react-router-dom";
 import BlogCard from "../../components/BlogCard";
+import Loading from "../../components/Loading";
 
 export default function Home() {
   const { blogs, loading, errors, deleteBlog } = useContext(BlogGlobalContext);
 
-  console.log(blogs, loading, errors);
-
   if (loading) {
-    return (
-      <p className="text-green-500 font-bold text-2xl h-48 flex items-center justify-center">
-        Loading blogs, please wait..
-      </p>
-    );
+    return <Loading />;
   }
 
   if (errors !== null) {
@@ -25,7 +20,7 @@ export default function Home() {
   }
 
   return (
-    <main className="flex flex-wrap max-w-5xl mx-auto gap-4 justify-center min-h-screen my-8">
+    <main className="flex flex-wrap max-w-5xl mx-auto gap-4 justify-center min-h-full my-8">
       {blogs && blogs.length > 0 ? (
         blogs.map((blog) => {
           return (

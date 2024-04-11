@@ -1,8 +1,9 @@
 import { useContext, useState } from "react";
 import { BlogGlobalContext } from "../../context";
+import Loading from "../../components/Loading";
 
 export default function AddBlog() {
-  const { addBlog } = useContext(BlogGlobalContext);
+  const { addBlog, loading, errors } = useContext(BlogGlobalContext);
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -18,6 +19,18 @@ export default function AddBlog() {
   function handleSubmit(e) {
     e.preventDefault();
     addBlog(formData.title, formData.description);
+  }
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  if (errors !== null) {
+    return (
+      <p className="text-red-600 font-bold text-2xl h-48 flex items-center justify-center uppercase">
+        {errors}
+      </p>
+    );
   }
 
   return (
