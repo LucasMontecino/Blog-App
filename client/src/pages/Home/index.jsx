@@ -25,7 +25,7 @@ export default function Home() {
   }
 
   return (
-    <main className="container flex flex-wrap max-w-5xl mx-auto gap-4 justify-center h-96 my-8">
+    <main className="flex flex-wrap max-w-5xl mx-auto gap-4 justify-center min-h-screen my-8">
       {blogs && blogs.length > 0 ? (
         blogs.map((blog) => {
           return (

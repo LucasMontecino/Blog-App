@@ -75,6 +75,27 @@ export default function BlogStateContext({ children }) {
     }
   }
 
+  async function addBlog(title, description) {
+    try {
+      const response = await fetch(`${urlRender}api/blog`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title, description }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log(data);
+      alert(`New Blog was created succesfully with id: ${data.newBlog._id}`);
+      window.location.assign("/");
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
   function handleBlogDetail(currentDetailId) {
     let cpyBlogs = [...blogs];
 
@@ -97,6 +118,7 @@ export default function BlogStateContext({ children }) {
         handleBlogDetail,
         blogDetail,
         updateBlog,
+        addBlog,
       }}
     >
       {children}
