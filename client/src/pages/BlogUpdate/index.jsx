@@ -45,10 +45,10 @@ export default function BlogUpdate() {
         Update Blog {blogDetail.title}
       </h2>
       <form
-        className="bg-white shadow-md rounded px-8 pt-6 pb-6 mb-4 max-w-xs flex flex-col items-center gap-2"
+        className="bg-white shadow-md rounded px-8 pt-6 pb-6 mb-4 w-3/5 max-w-lg flex flex-col items-center gap-2"
         onSubmit={handleSubmit}
       >
-        <div className="w-52">
+        <div className="w-5/6">
           <label
             htmlFor="title"
             className="block text-gray-700 text-sm font-bold mb-2"
@@ -65,7 +65,7 @@ export default function BlogUpdate() {
           />
         </div>
 
-        <div className="w-52">
+        <div className="w-5/6">
           <label
             htmlFor="description"
             className="block text-gray-700 text-sm font-bold mb-2"
@@ -74,7 +74,7 @@ export default function BlogUpdate() {
           </label>
           <textarea
             type="text"
-            rows={"6"}
+            rows={"8"}
             id="description"
             name="description"
             value={formData.description}
