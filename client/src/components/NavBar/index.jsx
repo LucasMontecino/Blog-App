@@ -19,10 +19,20 @@ export default function NavBar() {
         </h1>
         <ul className="flex gap-8">
           <li>
-            <NavLink to={"/"}>Home</NavLink>
+            <NavLink
+              to={"/"}
+              className={"font-bold hover:text-cyan-400 hover:underline"}
+            >
+              Home
+            </NavLink>
           </li>
           <li>
-            <NavLink to={"/addBlog"}>Add Blog</NavLink>
+            <NavLink
+              to={"/addBlog"}
+              className={"font-bold hover:text-cyan-400 hover:underline"}
+            >
+              Add Blog
+            </NavLink>
           </li>
         </ul>
       </nav>
