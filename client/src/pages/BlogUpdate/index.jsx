@@ -2,10 +2,11 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { BlogGlobalContext } from "../../context";
+import Loading from "../../components/Loading";
 
 export default function BlogUpdate() {
   const { id } = useParams();
-  const { blogDetail, handleBlogDetail, updateBlog } =
+  const { blogDetail, handleBlogDetail, updateBlog, loading, errors } =
     useContext(BlogGlobalContext);
 
   const [formData, setFormData] = useState({
@@ -37,7 +38,17 @@ export default function BlogUpdate() {
     }));
   }, [blogDetail]);
 
-  console.log(formData, blogDetail);
+  if (loading) {
+    return <Loading />;
+  }
+
+  if (errors !== null) {
+    return (
+      <p className="text-red-600 font-bold text-2xl h-48 flex items-center justify-center uppercase">
+        {errors}
+      </p>
+    );
+  }
 
   return (
     <div className="w-full flex flex-col items-center">

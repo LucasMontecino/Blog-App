@@ -28,13 +28,14 @@ export default function BlogStateContext({ children }) {
         }, 2000);
       }
     } catch (error) {
-      setErrors(error.message);
       setLoading(false);
+      setErrors(error.message);
     }
   }
 
   async function deleteBlog(currentId) {
     try {
+      setLoading(true);
       const response = await fetch(`${urlRender}api/blog`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
@@ -42,20 +43,25 @@ export default function BlogStateContext({ children }) {
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        setErrors(`HTTP error! status: ${response.status}`);
       }
 
       const data = await response.json();
-      console.log("Deleted blog: ", data);
-
-      window.location.reload();
+      if (data) {
+        setLoading(false);
+        setErrors(null);
+        console.log("Deleted blog: ", data);
+        window.location.reload();
+      }
     } catch (error) {
-      console.log(error.message);
+      setLoading(false);
+      setErrors(error.message);
     }
   }
 
   async function updateBlog(id, title, description) {
     try {
+      setLoading(true);
       const response = await fetch(`${urlRender}api/blog/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -63,20 +69,25 @@ export default function BlogStateContext({ children }) {
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        setErrors(`HTTP error! status: ${response.status}`);
       }
 
       const data = await response.json();
-      console.log("Update blog: ", data);
-
-      window.location.assign("/");
+      if (data) {
+        setLoading(false);
+        setErrors(null);
+        alert(`Blog updated succesfully!`);
+        window.location.assign("/");
+      }
     } catch (error) {
-      console.log(error.message);
+      setLoading(false);
+      setErrors(error.message);
     }
   }
 
   async function addBlog(title, description) {
     try {
+      setLoading(true);
       const response = await fetch(`${urlRender}api/blog`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -84,15 +95,19 @@ export default function BlogStateContext({ children }) {
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        setErrors(`HTTP error! status: ${response.status}`);
       }
 
       const data = await response.json();
-      console.log(data);
-      alert(`New Blog was created succesfully with id: ${data.newBlog._id}`);
-      window.location.assign("/");
+      if (data) {
+        setLoading(false);
+        setErrors(null);
+        alert(`New Blog was created succesfully with id: ${data.newBlog._id}`);
+        window.location.assign("/");
+      }
     } catch (error) {
-      console.log(error.message);
+      setLoading(false);
+      setErrors(error.message);
     }
   }
 
