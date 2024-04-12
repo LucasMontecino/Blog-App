@@ -41,7 +41,7 @@ export default function BlogUpdate({ theme }) {
   }, [blogDetail]);
 
   if (loading) {
-    return <Loading />;
+    return <Loading theme={theme} />;
   }
 
   if (errors !== null) {

@@ -24,7 +24,7 @@ export default function AddBlog({ theme }) {
   }
 
   if (loading) {
-    return <Loading />;
+    return <Loading theme={theme} />;
   }
 
   if (errors !== null) {

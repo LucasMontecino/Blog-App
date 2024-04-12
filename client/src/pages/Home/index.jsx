@@ -10,14 +10,12 @@ export default function Home({ theme }) {
   const { blogs, loading, errors, deleteBlog } = useContext(BlogGlobalContext);
 
   if (loading) {
-    return <Loading />;
+    return <Loading theme={theme} />;
   }
 
   if (errors !== null) {
     return <Errors errors={errors} />;
   }
-
-  console.log(theme);
 
   return (
     <main className="flex flex-wrap max-w-5xl mx-auto gap-4 justify-center min-h-full my-8">
