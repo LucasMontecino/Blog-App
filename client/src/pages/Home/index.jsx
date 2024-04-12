@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useContext } from "react";
 import { BlogGlobalContext } from "../../context";
 import { NavLink } from "react-router-dom";
@@ -5,7 +6,7 @@ import BlogCard from "../../components/BlogCard";
 import Loading from "../../components/Loading";
 import Errors from "../../components/Errors";
 
-export default function Home() {
+export default function Home({ theme }) {
   const { blogs, loading, errors, deleteBlog } = useContext(BlogGlobalContext);
 
   if (loading) {
@@ -16,12 +17,19 @@ export default function Home() {
     return <Errors errors={errors} />;
   }
 
+  console.log(theme);
+
   return (
     <main className="flex flex-wrap max-w-5xl mx-auto gap-4 justify-center min-h-full my-8">
       {blogs && blogs.length > 0 ? (
         blogs.map((blog) => {
           return (
-            <BlogCard blog={blog} key={blog._id} deleteBlog={deleteBlog} />
+            <BlogCard
+              blog={blog}
+              key={blog._id}
+              deleteBlog={deleteBlog}
+              theme={theme}
+            />
           );
         })
       ) : (

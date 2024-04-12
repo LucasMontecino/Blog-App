@@ -1,8 +1,14 @@
+/* eslint-disable react/prop-types */
 import { NavLink } from "react-router-dom";
+import { CiLight } from "react-icons/ci";
 
-export default function NavBar() {
+export default function NavBar({ theme, setTheme }) {
   function handleReload() {
     window.location.asign("/");
+  }
+
+  function handleTheme() {
+    setTheme(theme === "dark" ? "light" : "dark");
   }
 
   return (
@@ -17,6 +23,18 @@ export default function NavBar() {
             Blog Website
           </NavLink>
         </h1>
+
+        <button
+          className={`${
+            theme === "dark" ? "border-white" : "border-yellow-300"
+          } bg-transparent rounded-md border-2 p-1`}
+          onClick={handleTheme}
+        >
+          <CiLight
+            className={`${theme === "dark" ? "" : "text-yellow-300"} text-3xl`}
+          />
+        </button>
+
         <ul className="flex gap-8">
           <li>
             <NavLink
