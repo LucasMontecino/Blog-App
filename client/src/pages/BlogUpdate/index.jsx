@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -5,7 +6,7 @@ import { BlogGlobalContext } from "../../context";
 import Loading from "../../components/Loading";
 import Errors from "../../components/Errors";
 
-export default function BlogUpdate() {
+export default function BlogUpdate({ theme }) {
   const { id } = useParams();
   const { blogDetail, handleBlogDetail, updateBlog, loading, errors } =
     useContext(BlogGlobalContext);
@@ -40,7 +41,7 @@ export default function BlogUpdate() {
   }, [blogDetail]);
 
   if (loading) {
-    return <Loading />;
+    return <Loading theme={theme} />;
   }
 
   if (errors !== null) {
@@ -53,13 +54,17 @@ export default function BlogUpdate() {
         Update Blog {blogDetail.title}
       </h2>
       <form
-        className="bg-white shadow-md rounded px-8 pt-6 pb-6 mb-4 w-3/5 max-w-lg flex flex-col items-center gap-2"
+        className={`${
+          theme === "dark" ? "bg-gray-700" : "bg-white"
+        } shadow-md rounded px-8 pt-6 pb-6 mb-4 w-3/5 max-w-lg flex flex-col items-center gap-2`}
         onSubmit={handleSubmit}
       >
         <div className="w-5/6">
           <label
             htmlFor="title"
-            className="block text-gray-700 text-sm font-bold mb-2"
+            className={`${
+              theme === "dark" ? "text-gray-300" : "text-gray-700"
+            } block  text-sm font-bold mb-2`}
           >
             Title
           </label>
@@ -69,14 +74,18 @@ export default function BlogUpdate() {
             name="title"
             value={formData.title}
             onChange={handleInputChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className={`${
+              theme === "dark" ? "bg-gray-300" : "bg-white"
+            } shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
           />
         </div>
 
         <div className="w-5/6">
           <label
             htmlFor="description"
-            className="block text-gray-700 text-sm font-bold mb-2"
+            className={`${
+              theme === "dark" ? "text-gray-300" : "text-gray-700"
+            } block  text-sm font-bold mb-2`}
           >
             Description
           </label>
@@ -87,7 +96,9 @@ export default function BlogUpdate() {
             name="description"
             value={formData.description}
             onChange={handleInputChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className={`${
+              theme === "dark" ? "bg-gray-300" : "bg-white"
+            } shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
           ></textarea>
         </div>
 

@@ -2,11 +2,13 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { AiOutlineEdit } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
 /* eslint-disable react/prop-types */
-export default function BlogCard({ blog, deleteBlog }) {
+export default function BlogCard({ blog, deleteBlog, theme }) {
   return (
     <article
       key={blog._id}
-      className="rounded-md border bg-white shadow-md flex flex-col justify-between px-4 py-4 w-72 h-56"
+      className={`${
+        theme === "dark" ? "bg-gray-700" : "bg-white"
+      } rounded-md shadow-md flex flex-col justify-between px-4 py-4 w-72 h-56`}
     >
       <p className="border border-amber-300 bg-amber-100 shadow-md rounded-md px-3 py-2 min-h-24 max-h-32 line-clamp-4">
         {blog.description}

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useContext } from "react";
 import { BlogGlobalContext } from "../../context";
 import { NavLink } from "react-router-dom";
@@ -5,11 +6,11 @@ import BlogCard from "../../components/BlogCard";
 import Loading from "../../components/Loading";
 import Errors from "../../components/Errors";
 
-export default function Home() {
+export default function Home({ theme }) {
   const { blogs, loading, errors, deleteBlog } = useContext(BlogGlobalContext);
 
   if (loading) {
-    return <Loading />;
+    return <Loading theme={theme} />;
   }
 
   if (errors !== null) {
@@ -21,7 +22,12 @@ export default function Home() {
       {blogs && blogs.length > 0 ? (
         blogs.map((blog) => {
           return (
-            <BlogCard blog={blog} key={blog._id} deleteBlog={deleteBlog} />
+            <BlogCard
+              blog={blog}
+              key={blog._id}
+              deleteBlog={deleteBlog}
+              theme={theme}
+            />
           );
         })
       ) : (
