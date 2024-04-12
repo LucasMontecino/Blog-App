@@ -17,8 +17,8 @@ function App() {
       <NavBar theme={theme} setTheme={setTheme} />
       <Routes>
         <Route path="/" element={<Home theme={theme} />} />
-        <Route path="/addBlog" element={<AddBlog />} />
-        <Route path="/:id" element={<BlogUpdate />} />
+        <Route path="/addBlog" element={<AddBlog theme={theme} />} />
+        <Route path="/:id" element={<BlogUpdate theme={theme} />} />
       </Routes>
     </div>
   );
