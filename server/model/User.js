@@ -7,22 +7,33 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  password: String,
-  name: String,
-  lastname: String,
+  password: {
+    type: String,
+    required: true,
+  },
+  name: {
+    type: String,
+    default: null,
+  },
+  lastname: {
+    type: String,
+    default: null,
+  },
   date: {
     type: Date,
-    default: date.now,
+    default: Date.now,
   },
-  addres: String,
+  addres: {
+    type: String,
+    default: null,
+  },
   phone: {
     type: String,
+    default: null,
   },
-  birth: String,
+  birth: { type: String, default: null },
   isBanned: {
     type: Boolean,
-    defaultValue: false,
+    default: false,
   },
 });
-
-module.exports = mongoose.model("User", userSchema);

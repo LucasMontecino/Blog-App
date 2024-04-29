@@ -10,9 +10,9 @@ export default function BlogStateContext({ children }) {
 
   const [blogDetail, setBlogDetail] = useState({});
 
-  const urlRender = "https://blog-app-9384.onrender.com/";
+  // const localhost = "https://blog-app-9384.onrender.com/";
 
-  // const localhost = "http://localhost:3001/";
+  const localhost = "http://localhost:3001/";
 
   async function fetchingBlogs(url) {
     try {
@@ -36,7 +36,7 @@ export default function BlogStateContext({ children }) {
   async function deleteBlog(currentId) {
     try {
       setLoading(true);
-      const response = await fetch(`${urlRender}api/blog`, {
+      const response = await fetch(`${localhost}api/blog`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id: currentId }),
@@ -62,7 +62,7 @@ export default function BlogStateContext({ children }) {
   async function updateBlog(id, title, description) {
     try {
       setLoading(true);
-      const response = await fetch(`${urlRender}api/blog/${id}`, {
+      const response = await fetch(`${localhost}api/blog/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title, description }),
@@ -88,7 +88,7 @@ export default function BlogStateContext({ children }) {
   async function addBlog(title, description) {
     try {
       setLoading(true);
-      const response = await fetch(`${urlRender}api/blog`, {
+      const response = await fetch(`${localhost}api/blog`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title, description }),
@@ -120,7 +120,7 @@ export default function BlogStateContext({ children }) {
   }
 
   useEffect(() => {
-    fetchingBlogs(`${urlRender}api/blog`);
+    fetchingBlogs(`${localhost}api/blog`);
   }, []);
 
   return (
