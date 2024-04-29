@@ -13,7 +13,7 @@ export default function NavBar({ theme, setTheme }) {
 
   return (
     <header>
-      <nav className="flex justify-between px-8 h-12 items-center bg-slate-800 text-white shadow-md shadow-slate-800">
+      <nav className="flex justify-between px-8 h-16 items-center bg-slate-800 text-white shadow-md shadow-slate-800">
         <h1>
           <NavLink
             to={"/"}
