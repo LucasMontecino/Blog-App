@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 const blogRouter = require("../routes/blog-route");
+const userRouter = require("../routes/user-route");
 require("../db");
 
 const app = express();
@@ -27,6 +28,7 @@ app.use(express.json());
 app.use(morgan("dev"));
 
 app.use("/api", blogRouter);
+app.use("/api", userRouter);
 
 app.use("/api", (req, res) => {
   res.json("Hello World");

@@ -14,8 +14,15 @@ const userSchema = new Schema({
     type: Date,
     default: date.now,
   },
+  addres: String,
   phone: {
     type: String,
   },
   birth: String,
+  isBanned: {
+    type: Boolean,
+    defaultValue: false,
+  },
 });
+
+module.exports = mongoose.model("User", userSchema);
