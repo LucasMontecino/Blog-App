@@ -31,6 +31,12 @@ async function registerUser(req, res) {
   const date = new Date();
 
   try {
+    const user = await User.findOne({ email });
+
+    if (user) {
+      return res.status(409).json("There is a user with the same email !");
+    }
+
     const newUser = new User({ email, password, date });
 
     await newUser.save();
@@ -43,4 +49,26 @@ async function registerUser(req, res) {
   }
 }
 
-module.exports = { getUsers, registerUser };
+async function loginUser(req, res) {
+  const { email, password } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+
+    if (user && password === user.password) {
+      return res.status(200).json(`Welcome again ${user.email}!`);
+    }
+
+    return res
+      .status(400)
+      .json("There is no user with this email. Try again please.");
+  } catch (error) {
+    res.status(500).json({
+      message: "There's a problem with the server, please try again later.",
+    });
+  }
+}
+
+// async function updateUser(req, res) {}
+
+module.exports = { getUsers, registerUser, loginUser };
